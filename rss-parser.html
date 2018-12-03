@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <li></li>
+</body>
+
+<script src="dist/rss-parser.min.js"></script>
+
+<!-- js load after -->
+<script>
+
+    // Note: some RSS feeds can't be loaded in the browser due to CORS security.
+    // To get around this, you can use a proxy.
+
+
+    // Note: some RSS feeds can't be loaded in the browser due to CORS security.
+    // To get around this, you can use a proxy.
+    const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+
+    let parser = new RSSParser({
+        customFields: {
+            item: [
+                ['media:content', 'media:content', { keepArray: true }],
+            ]
+        }
+    })
+    parser.parseURL(CORS_PROXY + 'https://www.reddit.com/.rss', function (err, feed) {
+        console.log(feed.title);
+        feed.items.forEach(function (entry) {
+            console.log(entry);
+        })
+    })
+
+    !function (o) { console.old = console.log, console.log = function () { var n, e, t = ""; for (e = 0; e < arguments.length; e++)t += '<span class="log-' + typeof (n = arguments[e]) + '">', "object" == typeof n && "object" == typeof JSON && "function" == typeof JSON.stringify ? t += JSON.stringify(n) : t += n, t += "</span>&nbsp;"; o.innerHTML += t + "<br>", console.old.apply(void 0, arguments) } }
+		(document.body);
+</script>
+
+</html>
